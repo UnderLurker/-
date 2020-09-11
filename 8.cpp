@@ -49,7 +49,7 @@ bool can_move(string s, int n) {
 string move_to(string s, int n) {
 	string temp = s;
 	int nx = x + dir[n][0], ny = y + dir[n][1];
-	swap(temp[x * 3 + y], temp[nx * 3 + y]);
+	swap(temp[x * 3 + y], temp[nx * 3 + ny]);
 	return temp;
 }
 
@@ -67,8 +67,11 @@ int dfs(string s) {
 				string back = move_to(temp, i);
 				if (!visit[back]) {
 					visit[back] = true;
-					g[back] = g[temp] + 1;
-					list.push_front(back);
+					if (g[back])
+						g[back] = (g[temp] + 1) < g[back] ? g[temp] + 1 : g[back];
+					else
+						g[back] = g[temp] + 1;
+					list.push_back(back);
 				}
 			}
 		}
