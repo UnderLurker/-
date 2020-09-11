@@ -71,7 +71,12 @@ int dfs(string s) {
 						g[back] = (g[temp] + 1) < g[back] ? g[temp] + 1 : g[back];
 					else
 						g[back] = g[temp] + 1;
+					//深度优先与广度优先的差别
+					//广度优先
 					list.push_back(back);
+					//深度优先
+					list.push_front(back);
+					
 				}
 			}
 		}
